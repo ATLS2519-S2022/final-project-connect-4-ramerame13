@@ -14,7 +14,7 @@ public class GreedyPlayer implements Player{
     @Override
     public void init(int id, int msecPerMove, int rows, int cols) {
     	this.id = id; //id is your player's id, opponent's id is 3-id
-    	this.opponentId = id - 3;
+    	this.opponentId = 3 - id;
     	this.cols = cols;
     }
 
@@ -30,26 +30,31 @@ public class GreedyPlayer implements Player{
         // Make a random valid move.
         int col = 0;
         int tempMove = 0;
-        int bestMove = 0;
+        int bestMove = -1000;
         
-        for (int i = 0 ){
-        	if (){
-        	tempMove = board.move();
+        for (int i = 0; i < 7; i++){
         	
-        	calcScore();
-        	
-        	board.unmove();
-        	}
+    		if (board.isValidMove(i)){  		        	
+        	board.move(i, id);
+        	int tempScore = myScore(board, id);
+        	board.unmove(i, id);
+        	if (tempScore > bestMove){
+        		bestMove = tempScore;
+        		col = i;       		
+        		}
+    		}
         }
-        return bestMove;
         
-        //find maximum score from all possible moves
-        
+        //find maximum score from all possible moves       
         arb.setMove(col);
     }
+    
+    public int myScore(Connect4Board board, int id) {
+    	int score = calcScore(board, id);
+    	int oppScore = calcScore(board, opponentId);
+    	return score - oppScore;
+    }
 
- 
- 
 
 	public int calcScore(Connect4Board board, int id)
 	{
