@@ -40,7 +40,7 @@ public class GreedyPlayer implements Player{
         	board.unmove(i, id);
         	if (tempScore > bestMove){
         		bestMove = tempScore;
-        		col = i;       		
+        		col = i;   		
         		}
     		}
         }
